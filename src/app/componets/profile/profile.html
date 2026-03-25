@@ -1,0 +1,61 @@
+<div *ngIf="profile && profile.profile; else loading">
+
+  <!-- FOTO -->
+  <div>
+    <img 
+      *ngIf="profile.profile.fotoBase64; else noImage"
+      [src]="'data:image/png;base64,' + profile.profile.fotoBase64"
+      width="150"
+    />
+    <ng-template #noImage>
+      <p>Sin foto</p>
+    </ng-template>
+  </div>
+
+  <!-- MODO VER -->
+  <div *ngIf="!editMode">
+    <p>Nombre: {{ profile.nombre }}</p>
+    <p>Apellido: {{ profile.apellido }}</p>
+    <p>Usuario: {{ profile.usuario }}</p>
+
+    <p>Teléfono: {{ profile.profile.telefono || 'Sin especificar' }}</p>
+    <p>Correo: {{ profile.profile.correo || 'Sin especificar' }}</p>
+    <p>Biografía: {{ profile.profile.biografia || 'Sin especificar' }}</p>
+
+    <p>
+      Fecha de Cumpleaños:
+      {{ profile.profile.fechaNac ? (profile.profile.fechaNac | date:'yyyy-MM-dd') : 'Sin especificar' }}
+    </p>
+
+    <p>Género: {{ profile.profile.genero || 'Sin especificar' }}</p>
+
+    <button (click)="enableEdit()">Editar</button>
+  </div>
+
+  <!-- MODO EDITAR -->
+  <div *ngIf="editMode">
+    <input [(ngModel)]="profile.nombre" placeholder="Nombre">
+    <input [(ngModel)]="profile.apellido" placeholder="Apellido">
+
+    <textarea [(ngModel)]="profile.profile.fotoBase64" placeholder="Base64 de la imagen"></textarea>
+
+    <input [(ngModel)]="profile.profile.telefono" placeholder="Teléfono">
+    <input [(ngModel)]="profile.profile.correo" placeholder="Correo">
+    <textarea [(ngModel)]="profile.profile.biografia" placeholder="Biografía"></textarea>
+
+    <!-- IMPORTANTE para fechas -->
+    <input 
+      type="date" 
+      [(ngModel)]="profile.profile.fechaNac"
+    >
+
+    <input [(ngModel)]="profile.profile.genero" placeholder="Género">
+
+    <button (click)="save()">Guardar</button>
+  </div>
+
+</div>
+
+<ng-template #loading>
+  <p>Cargando perfil...</p>
+</ng-template>

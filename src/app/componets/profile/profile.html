@@ -1,6 +1,5 @@
 <div *ngIf="profile && profile.profile; else loading">
 
-  <!-- FOTO -->
   <div>
     <img 
       *ngIf="profile.profile.fotoBase64; else noImage"
@@ -12,7 +11,6 @@
     </ng-template>
   </div>
 
-  <!-- MODO VER -->
   <div *ngIf="!editMode">
     <p>Nombre: {{ profile.nombre }}</p>
     <p>Apellido: {{ profile.apellido }}</p>
@@ -32,7 +30,6 @@
     <button (click)="enableEdit()">Editar</button>
   </div>
 
-  <!-- MODO EDITAR -->
   <div *ngIf="editMode">
     <input [(ngModel)]="profile.nombre" placeholder="Nombre">
     <input [(ngModel)]="profile.apellido" placeholder="Apellido">
@@ -43,7 +40,6 @@
     <input [(ngModel)]="profile.profile.correo" placeholder="Correo">
     <textarea [(ngModel)]="profile.profile.biografia" placeholder="Biografía"></textarea>
 
-    <!-- IMPORTANTE para fechas -->
     <input 
       type="date" 
       [(ngModel)]="profile.profile.fechaNac"

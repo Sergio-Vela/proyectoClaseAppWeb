@@ -1,0 +1,35 @@
+<h2>{{ material.id ? 'Editar Material' : 'Nuevo Material' }}</h2>
+
+<mat-form-field>
+    <input matInput placeholder="Nombre" [(ngModel)]="material.nombre">
+</mat-form-field>
+
+<mat-form-field>
+    <input matInput placeholder="Descripción" [(ngModel)]="material.descripcion">
+</mat-form-field>
+
+<mat-form-field>
+    <mat-label>Categoría</mat-label>
+    <mat-select [(ngModel)]="material.categoriaId">
+        <mat-option *ngFor="let cat of categorias" [value]="cat.id">
+            {{ cat.nombre }}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+    <input matInput type="number" placeholder="Stock Actual" [(ngModel)]="material.stockActual">
+</mat-form-field>
+
+<mat-form-field>
+    <input matInput type="number" placeholder="Stock Mínimo" [(ngModel)]="material.stockMinimo">
+</mat-form-field>
+
+<mat-form-field>
+    <input matInput placeholder="Unidad de Medida" [(ngModel)]="material.unidadMedida">
+</mat-form-field>
+
+<div style="margin-top: 10px;">
+    <button mat-button (click)="close()">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="save()">Guardar</button>
+</div>

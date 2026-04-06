@@ -1,0 +1,17 @@
+<mat-toolbar color="primary">
+
+  <span style="margin-right: 20px;">Dental App</span>
+
+  <span class="spacer"></span>
+
+  <button 
+    mat-button 
+    *ngFor="let item of headers"
+    [routerLink]="item.ruta">
+
+    <mat-icon>{{ item.icono }}</mat-icon>
+    {{ item.nombre }}
+
+  </button>
+
+</mat-toolbar>

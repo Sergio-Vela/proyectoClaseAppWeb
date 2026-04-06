@@ -1,0 +1,32 @@
+<h2>Inventario</h2>
+
+<button mat-raised-button color="primary" (click)="addMaterial()">
+  <mat-icon>add</mat-icon>
+  Agregar Material
+</button>
+
+<mat-list>
+
+  <mat-list-item *ngFor="let mat of materials">
+
+    <div class="item">
+      <span>
+        {{ mat.nombre }} - Stock: {{ mat.stockActual }}
+      </span>
+
+      <div class="actions">
+
+        <button mat-icon-button color="primary" (click)="editMaterial(mat)">
+          <mat-icon>edit</mat-icon>
+        </button>
+
+        <button mat-icon-button color="warn" (click)="deleteMaterial(mat.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+
+      </div>
+    </div>
+
+  </mat-list-item>
+
+</mat-list>

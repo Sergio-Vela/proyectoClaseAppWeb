@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { AuthService } from '../../services/auth';
 
 @Component({
   selector: 'app-register',
@@ -17,6 +18,7 @@ import { MatInputModule } from '@angular/material/input';
   templateUrl: './register.html',
   styleUrl: './register.css',
 })
+
 export class Register {
 
   nombre = '';
@@ -25,9 +27,11 @@ export class Register {
   password = '';
   confirmPassword = '';
 
-  register(){
+  constructor(private authService: AuthService) { }
 
-    if(this.password !== this.confirmPassword){
+  register() {
+
+    if (this.password !== this.confirmPassword) {
       alert("Las contraseñas no coinciden");
       return;
     }
@@ -35,13 +39,20 @@ export class Register {
     const user = {
       nombre: this.nombre,
       apellido: this.apellido,
-      username: this.username,
+      usuario: this.username,
       password: this.password
     };
 
-    localStorage.setItem('registeredUser', JSON.stringify(user));
+    this.authService.register(user).subscribe({
+      next: () => {
+        alert("Usuario registrado correctamente");
+      },
+      error: (err) => {
+        console.error(err);
+        alert("Error al registrar");
+      }
+    });
 
-   alert("Usuario registrado correctamente");
   }
 
 }

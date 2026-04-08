@@ -66,11 +66,9 @@ export class Profile {
   }
 
   save() {
-    // 1. actualizar profile
     this.profileService.updateProfile(this.userId, this.profile.profile)
       .subscribe(() => {
 
-        // 2. actualizar user
         this.profileService.updateUser(this.userId, {
           nombre: this.profile.nombre,
           apellido: this.profile.apellido,
@@ -81,5 +79,10 @@ export class Profile {
         });
 
       });
+  }
+
+  cancel(){
+    this.editMode = false;
+    this.loadProfile();
   }
 }

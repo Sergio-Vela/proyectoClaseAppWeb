@@ -12,3 +12,28 @@ img {
   margin: 0 auto;
 }
 */
+
+/* profile.css */
+.example-card {
+  max-width: 600px;   /* más ancho que el ejemplo */
+  margin: 20px auto;  /* centrado horizontal */
+}
+
+mat-form-field {
+  width: 100%;        /* que ocupen todo el ancho */
+  margin-bottom: 15px;
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centra los inputs */
+}
+
+p{
+  color: #00F7FF;
+}
+
+.nombre {
+  color: #00F7FF;
+}

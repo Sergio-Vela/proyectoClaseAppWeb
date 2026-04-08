@@ -1,99 +1,98 @@
 <div *ngIf="profile && profile.profile; else loading">
 
-  <!-- FOTO -->
-  <div style="margin-bottom: 20px;">
-    <img 
-      *ngIf="profile.profile.fotoBase64; else noImage"
-      [src]="'data:image/png;base64,' + profile.profile.fotoBase64"
-      width="150"
-    />
-    <ng-template #noImage>
-      <p>Sin foto</p>
-    </ng-template>
-  </div>
-
   <!-- MODO VER -->
-  <mat-card *ngIf="!editMode">
+  <mat-card *ngIf="!editMode" class="example-card" appearance="outlined">
+    <mat-card-header>
+      <div mat-card-avatar>
+        <img 
+          *ngIf="profile.profile.fotoBase64; else noImage"
+          [src]="'data:image/png;base64,' + profile.profile.fotoBase64"
+          width="40" height="40"
+          style="border-radius: 50%;"
+        />
+        <ng-template #noImage>
+          <span>👤</span>
+        </ng-template>
+      </div>
+      <mat-card-title class="nombre">{{ profile.nombre }} {{ profile.apellido }}</mat-card-title>
+      <mat-card-subtitle>{{ profile.usuario }}</mat-card-subtitle>
+    </mat-card-header>
 
-    <p><strong>Nombre:</strong> {{ profile.nombre }}</p>
-    <p><strong>Apellido:</strong> {{ profile.apellido }}</p>
-    <p><strong>Usuario:</strong> {{ profile.usuario }}</p>
+    <img mat-card-image 
+     *ngIf="profile.profile.fotoBase64" 
+     [src]="'data:image/png;base64,' + profile.profile.fotoBase64" 
+     alt="Foto de perfil">
 
-    <p><strong>Teléfono:</strong> {{ profile.profile.telefono || 'Sin especificar' }}</p>
-    <p><strong>Correo:</strong> {{ profile.profile.correo || 'Sin especificar' }}</p>
-    <p><strong>Biografía:</strong> {{ profile.profile.biografia || 'Sin especificar' }}</p>
+    <mat-card-content>
+      <p><strong>Teléfono:</strong> {{ profile.profile.telefono || 'Sin especificar' }}</p>
+      <p><strong>Correo:</strong> {{ profile.profile.correo || 'Sin especificar' }}</p>
+      <p><strong>Biografía:</strong> {{ profile.profile.biografia || 'Sin especificar' }}</p>
+      <p>
+        <strong>Fecha de Cumpleaños:</strong>
+        {{ profile.profile.fechaNac ? (profile.profile.fechaNac | date:'yyyy-MM-dd') : 'Sin especificar' }}
+      </p>
+      <p>
+        <strong>Género:</strong>
+        {{
+          profile.profile.genero === 'M' ? 'Hombre' :
+          profile.profile.genero === 'F' ? 'Mujer' :
+          'Sin especificar'
+        }}
+      </p>
+    </mat-card-content>
 
-    <p>
-      <strong>Fecha de Cumpleaños:</strong>
-      {{ profile.profile.fechaNac ? (profile.profile.fechaNac | date:'yyyy-MM-dd') : 'Sin especificar' }}
-    </p>
-
-    <p>
-      <strong>Género:</strong>
-      {{
-        profile.profile.genero === 'M' ? 'Hombre' :
-        profile.profile.genero === 'F' ? 'Mujer' :
-        'Sin especificar'
-      }}
-    </p>
-
-    <button mat-raised-button color="primary" (click)="enableEdit()">
-      Editar
-    </button>
-
+    <mat-card-actions style="justify-content: center;">
+      <button mat-raised-button color="primary" (click)="enableEdit()">Editar</button>
+    </mat-card-actions>
   </mat-card>
 
   <!-- MODO EDITAR -->
-  <mat-card *ngIf="editMode">
+  <mat-card *ngIf="editMode" class="example-card" appearance="outlined">
+    <mat-card-content>
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput [(ngModel)]="profile.nombre">
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Nombre</mat-label>
-      <input matInput [(ngModel)]="profile.nombre">
-    </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Apellido</mat-label>
+        <input matInput [(ngModel)]="profile.apellido">
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Apellido</mat-label>
-      <input matInput [(ngModel)]="profile.apellido">
-    </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Teléfono</mat-label>
+        <input matInput [(ngModel)]="profile.profile.telefono">
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Foto (Base64)</mat-label>
-      <textarea matInput [(ngModel)]="profile.profile.fotoBase64"></textarea>
-    </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Correo</mat-label>
+        <input matInput [(ngModel)]="profile.profile.correo">
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Teléfono</mat-label>
-      <input matInput [(ngModel)]="profile.profile.telefono">
-    </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Biografía</mat-label>
+        <textarea matInput [(ngModel)]="profile.profile.biografia"></textarea>
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Correo</mat-label>
-      <input matInput [(ngModel)]="profile.profile.correo">
-    </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha de nacimiento</mat-label>
+        <input matInput type="date" [(ngModel)]="profile.profile.fechaNac">
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Biografía</mat-label>
-      <textarea matInput [(ngModel)]="profile.profile.biografia"></textarea>
-    </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Género</mat-label>
+        <mat-select [(ngModel)]="profile.profile.genero">
+          <mat-option value="">Seleccione género</mat-option>
+          <mat-option value="M">Hombre</mat-option>
+          <mat-option value="F">Mujer</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-card-content>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Fecha de nacimiento</mat-label>
-      <input matInput type="date" [(ngModel)]="profile.profile.fechaNac">
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Género</mat-label>
-      <mat-select [(ngModel)]="profile.profile.genero">
-        <mat-option value="">Seleccione género</mat-option>
-        <mat-option value="M">Hombre</mat-option>
-        <mat-option value="F">Mujer</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <button mat-raised-button color="accent" (click)="save()">
-      Guardar
-    </button>
-
+    <mat-card-actions style="justify-content: center;">
+      <button mat-raised-button color="accent" (click)="save()">Guardar</button>
+      <button mat-raised-button color="warn" (click)="cancel()">Cancelar</button>
+    </mat-card-actions>
   </mat-card>
 
 </div>

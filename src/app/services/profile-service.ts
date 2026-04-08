@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class ProfileService {
   private apiUrl = 'http://localhost:3000/api/profiles';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getProfile(userId: number) {
     return this.http.get(`${this.apiUrl}/${userId}`);
@@ -15,5 +15,9 @@ export class ProfileService {
 
   updateProfile(userId: number, data: any) {
     return this.http.put(`${this.apiUrl}/${userId}`, data);
+  }
+
+  updateUser(userId: number, data: any) {
+    return this.http.put(`http://localhost:3000/api/users/${userId}`, data);
   }
 }

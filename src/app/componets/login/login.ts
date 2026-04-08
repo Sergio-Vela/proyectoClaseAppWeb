@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { LoginInter } from '../../interfaces/login-dt';
 import { FormsModule } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,24 +17,36 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
 
-  login(){
-    console.log('Usuario:', this.username);
-    console.log('Password:', this.password);
-    
+  constructor (private router: Router) {}
+
+  login() {
     if (this.username !== '' && this.password !== '') {
-      const objectRequest: LoginInter = {
-        username: this.username,
+
+      const objectRequest = {
+        usuario: this.username,
         password: this.password
       };
 
-      this.loginService.doLogin(objectRequest).subscribe(entry => {
-        if (entry) {
-          console.log('Login exitoso:', entry);
-        } else {
-          console.log('Login fallido');
+      this.loginService.doLogin(objectRequest).subscribe({
+        next: (res) => {
+
+          localStorage.setItem('token', res.token);
+          localStorage.setItem('user', JSON.stringify(res.user));
+
+          console.log('Login exitoso', res);
+          
+          const user = JSON.parse(localStorage.getItem('user') || '{}');
+          if (user.id) {
+            this.router.navigate(['/profile/'+ user.id]);  
+          }
+
+        },
+        error: (err) => {
+          console.error(err);
+          alert("Credenciales incorrectas");
         }
       });
     }
-  
   }
+
 }

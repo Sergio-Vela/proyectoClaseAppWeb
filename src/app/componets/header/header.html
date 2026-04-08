@@ -7,7 +7,7 @@
   <button 
     mat-button 
     *ngFor="let item of headers"
-    [routerLink]="item.ruta">
+    [routerLink]="getRoute(item.ruta)">
 
     <mat-icon>{{ item.icono }}</mat-icon>
     {{ item.nombre }}

@@ -15,14 +15,24 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class HeaderComponent {
   headers: HeaderDto[] = [];
+  userId: number = 0;
 
   constructor(private headerService: HeaderService) { }
 
   ngOnInit() {
+    const user = JSON.parse(localStorage.getItem('user')!)
+    this.userId = user?.id || 0;
+
     this.headerService.getHeaders().subscribe(data => {
       this.headers = data;
     });
   }
 
+  getRoute(ruta: string) {
+    if (ruta === '/profile') {
+      return ['/profile', this.userId];
+    }
+    return [ruta];
+  }
 
 }

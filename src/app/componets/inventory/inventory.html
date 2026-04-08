@@ -1,30 +1,44 @@
-<h2>Inventario</h2>
+<h2 class="title">Materiales disponibles</h2>
 
-<button mat-raised-button color="primary" (click)="addMaterial()">
-  <mat-icon>add</mat-icon>
-  Agregar Material
-</button>
+<div class="toolbar">
+  <button mat-raised-button color="primary" (click)="addMaterial()">
+    <mat-icon>add</mat-icon>
+    Agregar Material
+  </button>
+</div>
 
-<mat-list>
+<mat-list class="list">
 
-  <mat-list-item *ngFor="let mat of materials">
+  <mat-list-item *ngFor="let mat of materials" class="list-item">
 
     <div class="item">
-      <span>
-        {{ mat.nombre }} - Stock: {{ mat.stockActual }}
-      </span>
 
-      <div class="actions">
+      <div class="info">
+        <h3>{{ mat.nombre }}</h3>
+        <p class="desc">{{ mat.descripcion }}</p>
+        <p class="cat">Categoría ID: {{ mat.categoriaId }}</p>
+      </div>
 
-        <button mat-icon-button color="primary" (click)="editMaterial(mat)">
-          <mat-icon>edit</mat-icon>
-        </button>
+      <div class="right">
 
-        <button mat-icon-button color="warn" (click)="deleteMaterial(mat.id)">
-          <mat-icon>delete</mat-icon>
-        </button>
+        <span 
+          class="stock"
+          [class.low]="mat.stockActual <= mat.stockMinimo">
+          Stock: {{ mat.stockActual }}
+        </span>
+
+        <div class="actions">
+          <button mat-icon-button color="primary" (click)="editMaterial(mat)">
+            <mat-icon>edit</mat-icon>
+          </button>
+
+          <button mat-icon-button color="warn" (click)="deleteMaterial(mat.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
 
       </div>
+
     </div>
 
   </mat-list-item>

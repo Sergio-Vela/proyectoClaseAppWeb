@@ -1,33 +1,18 @@
-/*
-mat-card {
-  max-width: 500px;
-  margin: 20px auto;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
 
-img {
-  display: block;
-  margin: 0 auto;
-}
-*/
-
-/* profile.css */
 .example-card {
-  max-width: 600px;   /* más ancho que el ejemplo */
-  margin: 20px auto;  /* centrado horizontal */
+  max-width: 600px;   
+  margin: 20px auto; 
 }
 
 mat-form-field {
-  width: 100%;        /* que ocupen todo el ancho */
+  width: 100%;       
   margin-bottom: 15px;
 }
 
 mat-card-content {
   display: flex;
   flex-direction: column;
-  align-items: center; /* centra los inputs */
+  align-items: center;
 }
 
 p{

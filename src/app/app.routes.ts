@@ -22,25 +22,29 @@ export const routes: Routes = [
 
     {
         path: 'dashboard',
-        component: Dashboard//,
-        //canActivate: [authGuard]
+        component: Dashboard,
+        canActivate: [authGuard]
     },
 
     {
         path: 'profile/:id',
-        component: Profile
+        component: Profile,
+        canActivate: [authGuard]
     },
     {
         path: 'inventory',
-        component: Inventory
+        component: Inventory,
+        canActivate: [authGuard]
     },
     {
         path: 'purchases',
-        component: Purchase
+        component: Purchase,
+        canActivate: [authGuard]
     },
     {
         path: 'movements',
-        component: Movement
+        component: Movement,
+        canActivate: [authGuard]
     }
 
 ];

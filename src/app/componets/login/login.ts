@@ -29,7 +29,6 @@ export class LoginComponent {
 
       this.loginService.doLogin(objectRequest).subscribe({
         next: (res) => {
-
           localStorage.setItem('token', res.token);
           localStorage.setItem('user', JSON.stringify(res.user));
 

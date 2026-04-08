@@ -4,12 +4,9 @@
   <mat-card *ngIf="!editMode" class="example-card" appearance="outlined">
     <mat-card-header>
       <div mat-card-avatar>
-        <img 
-          *ngIf="profile.profile.fotoBase64; else noImage"
-          [src]="'data:image/png;base64,' + profile.profile.fotoBase64"
-          width="40" height="40"
-          style="border-radius: 50%;"
-        />
+        <img *ngIf="profile.profile.fotoBase64; else noImage"
+          [src]="'data:image/png;base64,' + profile.profile.fotoBase64" width="40" height="40"
+          style="border-radius: 50%;" />
         <ng-template #noImage>
           <span>👤</span>
         </ng-template>
@@ -18,10 +15,8 @@
       <mat-card-subtitle>{{ profile.usuario }}</mat-card-subtitle>
     </mat-card-header>
 
-    <img mat-card-image 
-     *ngIf="profile.profile.fotoBase64" 
-     [src]="'data:image/png;base64,' + profile.profile.fotoBase64" 
-     alt="Foto de perfil">
+    <img mat-card-image *ngIf="profile.profile.fotoBase64" [src]="'data:image/png;base64,' + profile.profile.fotoBase64"
+      alt="Foto de perfil">
 
     <mat-card-content>
       <p><strong>Teléfono:</strong> {{ profile.profile.telefono || 'Sin especificar' }}</p>
@@ -34,9 +29,9 @@
       <p>
         <strong>Género:</strong>
         {{
-          profile.profile.genero === 'M' ? 'Hombre' :
-          profile.profile.genero === 'F' ? 'Mujer' :
-          'Sin especificar'
+        profile.profile.genero === 'M' ? 'Hombre' :
+        profile.profile.genero === 'F' ? 'Mujer' :
+        'Sin especificar'
         }}
       </p>
     </mat-card-content>
@@ -49,6 +44,21 @@
   <!-- MODO EDITAR -->
   <mat-card *ngIf="editMode" class="example-card" appearance="outlined">
     <mat-card-content>
+
+      <!-- FOTO BASE64 -->
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Foto (Base64)</mat-label>
+        <textarea matInput rows="4" [(ngModel)]="profile.profile.fotoBase64"
+          placeholder="Pega aquí el base64 de la imagen">
+  </textarea>
+      </mat-form-field>
+
+      <!-- PREVIEW DE IMAGEN -->
+      <div *ngIf="profile.profile.fotoBase64" style="text-align: center; margin-top: 10px;">
+        <img [src]="'data:image/png;base64,' + profile.profile.fotoBase64" width="120"
+          style="border-radius: 10px; border: 1px solid #ccc;" />
+      </div>
+
       <mat-form-field appearance="outline">
         <mat-label>Nombre</mat-label>
         <input matInput [(ngModel)]="profile.nombre">

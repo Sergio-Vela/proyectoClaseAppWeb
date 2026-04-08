@@ -1,1 +1,32 @@
-<p>dashboard works!</p>
+<h2 class="title">Bienvenido</h2>
+
+<div class="dashboard-container">
+
+  <mat-card class="card total">
+    <mat-card-header>
+      <mat-card-title>Total Materiales</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <h1>{{ totalMateriales }}</h1>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="card warning">
+    <mat-card-header>
+      <mat-card-title>Bajo Stock</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <h1>{{ bajoStock }}</h1>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="card info">
+    <mat-card-header>
+      <mat-card-title>Categorías</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <h1>{{ totalCategorias }}</h1>
+    </mat-card-content>
+  </mat-card>
+
+</div>

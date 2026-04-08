@@ -1,11 +1,98 @@
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #01579b;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.list {
+  max-width: 900px;
+  margin: auto;
+}
+
+mat-list-item.list-item {
+  margin-bottom: 12px;
+  border-radius: 12px;
+  background: #e0f7fa;
+  width: 100%;
+}
+
 .item {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   width: 100%;
-  align-items: center;
+  padding: 12px;
+  gap: 10px;
+}
+
+.info {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.info h3 {
+  margin: 0;
+  color: #006064;
+  font-weight: 600;
+}
+
+.desc {
+  margin: 4px 0;
+  color: #004d40;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.cat {
+  font-size: 12px;
+  color: #00796b;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+  min-width: 140px;
+}
+
+.stock {
+  font-weight: bold;
+  color: #007c91;
+}
+
+.stock.low {
+  color: red;
 }
 
 .actions {
+  margin-top: 8px;
   display: flex;
-  gap: 10px;
+  gap: 6px;
+}
+
+@media (max-width: 600px) {
+  .item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .right {
+    align-items: flex-start;
+    margin-top: 10px;
+    min-width: auto;
+    width: 100%;
+  }
+
+  .actions {
+    margin-top: 8px;
+    justify-content: flex-start;
+  }
 }

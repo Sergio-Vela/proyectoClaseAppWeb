@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
@@ -7,10 +7,11 @@ import { MaterialDto } from '../../interfaces/material-dto';
 import { MaterialService } from '../../services/material-service';
 import { MatDialog } from '@angular/material/dialog';
 import { MaterialDialogComponent } from '../material-dialog/material-dialog';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-inventory',
-  imports: [CommonModule, MatButtonModule, MatListModule, MatIconModule],
+  imports: [CommonModule, MatButtonModule, MatListModule, MatIconModule, MatCardModule],
   templateUrl: './inventory.html',
   styleUrl: './inventory.css',
 })
@@ -18,7 +19,7 @@ export class Inventory {
 
   materials: MaterialDto[] = [];
 
-  constructor(private materialService: MaterialService, private dialog: MatDialog) { }
+  constructor(private materialService: MaterialService, private dialog: MatDialog, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
     console.log("Inventory cargado");
@@ -28,6 +29,7 @@ export class Inventory {
   loadMaterials() {
     this.materialService.getMaterials().subscribe((data: MaterialDto[]) => {
       this.materials = [...data];
+      this.cdr.detectChanges();
     });
   }
 
@@ -55,7 +57,7 @@ export class Inventory {
   editMaterial(mat: MaterialDto) {
     const dialogRef = this.dialog.open(MaterialDialogComponent, {
       width: '400px',
-      data: mat // le pasas el material actual
+      data: mat 
     });
 
     dialogRef.afterClosed().subscribe(result => {

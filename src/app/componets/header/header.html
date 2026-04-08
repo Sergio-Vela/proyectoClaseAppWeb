@@ -4,14 +4,20 @@
 
   <span class="spacer"></span>
 
-  <button 
-    mat-button 
-    *ngFor="let item of headers"
-    [routerLink]="getRoute(item.ruta)">
+  <button mat-button *ngFor="let item of headers" [routerLink]="getRoute(item.ruta)">
 
     <mat-icon>{{ item.icono }}</mat-icon>
     {{ item.nombre }}
 
+  </button>
+
+  <button 
+    *ngIf="isLoggedIn"
+    mat-button
+    (click)="logout()">
+
+    <mat-icon>logout</mat-icon>
+    Logout
   </button>
 
 </mat-toolbar>

@@ -11,6 +11,7 @@ import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-inventory',
+  standalone: true,
   imports: [CommonModule, MatButtonModule, MatListModule, MatIconModule, MatCardModule],
   templateUrl: './inventory.html',
   styleUrl: './inventory.css',
